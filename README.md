@@ -1,5 +1,15 @@
 # Monte Carlo Option Pricing
-A program using yfinance and Monte Carlo methods to retrieve data and value options using said data.
+
+## Description
+
+This project implements a Monte Carlo simulation for option pricing, leveraging numba for dynamic compilation and performance enhancement. The primary objective is to estimate the value of an option based on the Monte Carlo method, which utilizes random sampling to compute the results.
+
+## Features
+**Monte Carlo Simulation:** Simulates numerous paths of stock prices to estimate the option value.
+
+**Dynamic Compilation with Numba:** Uses Numba's @jit decorator to dynamically compile the simulation function, improving performance by optimizing execution speed.
+
+**Flexible Contract Selection:** Enables users to choose exactly which option they want to value. 
 
 https://github.com/user-attachments/assets/a358a8e3-304a-4005-a158-2bab29d08ddb
 
@@ -11,5 +21,7 @@ https://github.com/user-attachments/assets/a358a8e3-304a-4005-a158-2bab29d08ddb
 | datetime  | Module used to calcuate time horizon for options  |
 | numba  | Used to dynamically-compile the simulation   |
 | tabulate  | Used for presenting option choices to user  |
+
+
 
 
