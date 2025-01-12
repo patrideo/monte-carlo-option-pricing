@@ -13,6 +13,7 @@ def main():
     global options_date
     global exp_date
     global K
+    global optionValue
     ticker=input("For which stock would you like to value an option? Please input the ticker.")
     stock = yf.Ticker(ticker)
     
@@ -20,7 +21,7 @@ def main():
     options_date = stock.option_chain()
     K=strikePicker()
     optionValue=msc(int(input("How many paths would you like to run?")))
-    print(optionValue)
+    returnStats()
     
 def datePicker():
     global options_date
@@ -71,8 +72,10 @@ def strikePicker():
     return strikes.loc[int(date_index), 'strike']
 
 def msc(p):
+    global S0
     r=0.045
     S0=get_current_price()
+    
     
     date2 = datetime.strptime(exp_date, '%Y-%m-%d')
     days_difference = (date2 - datetime.today()).days
@@ -90,8 +93,16 @@ def msc(p):
 
 msc_nb=nb.jit(msc)
 
+def returnStats():
+    print(f"The current stock price is {S0}.")
+    print(f"The selected expiry date is {exp_date}.")
+    print(f"The selected strike price is {K}.")
+    print(f"The {ticker} option is valued at ${optionValue}.")
 
-main()
+
+
+if __name__=="__main__":
+    main()
 
 
 
