@@ -3,7 +3,6 @@ import numba as nb
 import yfinance as yf
 from tabulate import tabulate 
 import sys
-import pandas as pd
 import math
 from datetime import datetime
 
