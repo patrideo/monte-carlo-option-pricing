@@ -1,5 +1,5 @@
 import numpy as np
-import numba as nb
+from numba import jit
 import yfinance as yf
 from tabulate import tabulate
 import sys
@@ -54,7 +54,7 @@ def strikePicker(options_date):
     sigma = strikes.loc[index, 'impliedVolatility']
     return K, sigma
 
-
+@jit(nopython=True)
 def msc(p, S0, r, T, K, sigma):
     M = I = p
     dt = T / M
