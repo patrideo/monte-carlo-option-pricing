@@ -11,14 +11,18 @@ def main():
     stock = yf.Ticker(ticker)
     exp_date = datePicker(stock)
     options_date = stock.option_chain(exp_date)
-    K, sigma = strikePicker(options_date)
+    # Picking a strike
+    K, sigma, putORcall = strikePicker(options_date)
+    # Choosing path number
     paths = int(input("How many paths would you like to run? "))
     r = 0.045
     S0 = get_current_price(stock)
+    # Calculate time until maturity
     date2 = datetime.strptime(exp_date, '%Y-%m-%d')
     days_difference = (date2 - datetime.today()).days
     T = days_difference / 365.25
-    option_value = msc(paths, S0, r, T, K, sigma)
+    # Run Put or Call valuation
+    option_value = msc(paths, S0, r, T, K, sigma, putORcall)
     returnStats(S0, exp_date, K, option_value)
 
 def datePicker(stock):
@@ -52,10 +56,10 @@ def strikePicker(options_date):
     index = int(input("Please select a strike by entering its respective index: "))
     K = strikes.loc[index, 'strike']
     sigma = strikes.loc[index, 'impliedVolatility']
-    return K, sigma
+    return K, sigma, putORcall
 
 @jit(nopython=True)
-def msc(p, S0, r, T, K, sigma):
+def msc(p, S0, r, T, K, sigma, putORcall):
     M = I = p
     dt = T / M
     S = np.zeros((M + 1, I))
@@ -63,7 +67,14 @@ def msc(p, S0, r, T, K, sigma):
     rn = np.random.standard_normal(S.shape)
     for t in range(1, M + 1):
         S[t] = S[t - 1] * np.exp((r - sigma**2 / 2) * dt + sigma * np.sqrt(dt) * rn[t])
-    return np.exp(-r * T) * np.maximum(K - S[-1], 0).mean()
+    # Put vs call valuation
+    if putORcall=="p":
+        return np.exp(-r * T) * np.maximum(K - S[-1], 0).mean()
+    else:
+        return np.exp(-r * T) * np.maximum(S[-1] - K, 0).mean()
+
+
+
 
 # Return screen
 def returnStats(S0, exp_date, K, option_value):
