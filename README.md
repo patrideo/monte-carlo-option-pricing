@@ -11,7 +11,7 @@ This project implements a Monte Carlo simulation for option pricing, leveraging 
 
 **Flexible Contract Selection:** Enables users to choose exactly which option they want to value. 
 
-https://github.com/user-attachments/assets/a358a8e3-304a-4005-a158-2bab29d08ddb
+https://github.com/user-attachments/assets/030548fb-002e-495e-a012-ec3e72d2186e
 
 | Technologies Used  | Uses |
 | ------------- | ------------- |
@@ -21,6 +21,10 @@ https://github.com/user-attachments/assets/a358a8e3-304a-4005-a158-2bab29d08ddb
 | datetime  | Module used to calcuate time horizon for options  |
 | numba  | Used to dynamically-compile the simulation   |
 | tabulate  | Used for presenting option choices to user  |
+
+
+
+
 
 
 
