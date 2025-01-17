@@ -15,7 +15,7 @@ https://github.com/user-attachments/assets/030548fb-002e-495e-a012-ec3e72d2186e
 
 | Technologies Used  | Uses |
 | ------------- | ------------- |
-| yfinance  | Library used to retreieve real-time stock data and option contract offerings |
+| yfinance  | Library used to retrieve real-time stock data and option contract offerings |
 | numpy  | Manages arrays for the Monte Carlo Simulation  |
 | pandas  | Used for managing live stock data |
 | datetime  | Module used to calcuate time horizon for options  |
